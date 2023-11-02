@@ -24,7 +24,7 @@ export default function Intro() {
       </div>
 
       <motion.p className="mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-2xl" initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, bounce: 0.25 }}>
-        <span className="font-bold">Hello, I'm Rowan.</span> I'm a <span className="font-bold">full-stack developer</span> with <span className="font-bold">4 years</span> of experience. I enjoy <span className="italic">webdevelopment & software</span>.<br /> My focus is <span className="underline">React (Next.js), python and ai</span>.
+        <span className="font-bold">Hello, I'm Rowan.</span> I'm a <span className="font-bold">full-stack developer</span> with <span className="font-bold">4 years</span> of experience. I enjoy <span className="italic">webdevelopment & software</span>.<br /> My focus is <span className="underline">React (Next.js), python and ai </span>.
       </motion.p>
 
       <motion.div className=" flex flex-col sm:flex-row items-center justify-center gap-4 px-4 text-lg font-medium " initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, bounce: 0.25, delay: 0.1 }}>
