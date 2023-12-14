@@ -7,7 +7,7 @@ import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
 import RTcodesImg from "@/public/RT-codes.png";
 import LLDImg from "@/public/LLD.png";
-import ApiImg from "@/public/api.png";
+import ApiImg from "@/public/Api.png";
 
 export const links = [
   {
