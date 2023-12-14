@@ -25,7 +25,7 @@ export default function Footer() {
                 </a>
             </div>
             
-            <div className='mt-auto text-black/[0.48]'>
+            <div className='mt-auto text-black/[0.48] p-8 sm:p-0 text-center'>
                 <p>{ tagline }</p>
             </div>
 
