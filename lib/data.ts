@@ -1,6 +1,6 @@
 import React from "react";
 import { CgWorkAlt } from "react-icons/cg";
-import { FaReact } from "react-icons/fa";
+import { FaCog, FaEnvelope, FaReact, FaStore } from "react-icons/fa";
 import { LuGraduationCap } from "react-icons/lu";
 import corpcommentImg from "@/public/corpcomment.png";
 import rmtdevImg from "@/public/rmtdev.png";
@@ -35,28 +35,36 @@ export const links = [
 
 export const experiencesData = [
   {
-    title: "Graduated bootcamp",
-    location: "Miami, FL",
+    title: "2007 - 2011 Grafisch Lyceum (Game Design)",
+    location: "Utrecht - Netherlands",
     description:
-      "I graduated after 6 months of studying. I immediately found a job as a front-end developer.",
+      "Finished my Gamedesign and development study. Learned about 3D modeling, animation, game design, programming and more.",
     icon: React.createElement(LuGraduationCap),
-    date: "2019",
+    date: "2007 - 2011",
   },
   {
-    title: "Front-End Developer",
-    location: "Orlando, FL",
+    title: "Flow Studios",
+    location: "Dutch Game Garden -> Utrecht - Netherlands",
     description:
-      "I worked as a front-end developer for 2 years in 1 job and 1 year in another job. I also upskilled to the full stack.",
+      "Ran a small indie game studio called Flow studios for about 5 years. Nominated for best student learning company in the Netherlands, worked for several clients and platforms. Started as Concept Artist and Manager and eventually fulfilled many roles like 3d modeling and Programming.",
     icon: React.createElement(CgWorkAlt),
-    date: "2019 - 2021",
+    date: "2011 - 2017",
   },
   {
-    title: "Full-Stack Developer",
-    location: "Houston, TX",
+    title: "Several non-tech jobs",
+    location: "Netherlands",
     description:
-      "I'm now a full-stack developer working as a freelancer. My stack includes React, Next.js, TypeScript, Tailwind, Prisma and MongoDB. I'm open to full-time opportunities.",
-    icon: React.createElement(FaReact),
-    date: "2021 - present",
+      "Had several non-tech related jobs like Catering, Caretaker and designer at t-shirt printing company. For more info check my resume.",
+    icon: React.createElement(CgWorkAlt),
+    date: "2017 - 2021", 
+  },
+  {
+    title: "Full-stack/Lead Developer - LCB LED Europe",
+    location: "Almere - Netherlands",
+    description:
+      "Worked as a full-stack developer on the company websites and stores (mainly runs on lightspeed). Worked on internal tools to upload and maintain product data and specifications to handle huge amounts of products per store. Took care of most api integrations, styles and front-end changes.",
+    icon: React.createElement(FaCog),
+    date: "2021 - 2023",
   },
 ] as const;
 
@@ -84,24 +92,40 @@ export const projectsData = [
   },
 ] as const;
 
+export const contactData = [
+  {
+    email: "rowan.nicolay@gmail.com",
+    tagline: "Website runs on Nextjs/React and ☕️ - Deployed on Vercel - Made by Rowan"
+  }
+]
+
 export const skillsData = [
   "HTML",
   "CSS",
   "JavaScript",
-  "TypeScript",
+  "Python",
   "React",
   "Next.js",
   "Node.js",
+  "TypeScript",
   "Git",
   "Tailwind",
-  "Prisma",
-  "MongoDB",
-  "Redux",
-  "GraphQL",
-  "Apollo",
-  "Express",
+  "C#",
+  "Photoshop",
+  "Illustrator",
+  "Figma",
+  "Flutter",
   "PostgreSQL",
   "Python",
   "Django",
-  "Framer Motion",
+  "Vim / Neovim",
+  "Unity",
+  "Blender",
+  "ZBrush",
+  "Cinema 4D",
+  "Maya",
+  "3DS Max",
+  "Unreal Engine",
+  "Debian",
+
 ] as const;
