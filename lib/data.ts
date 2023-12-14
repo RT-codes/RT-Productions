@@ -5,6 +5,9 @@ import { LuGraduationCap } from "react-icons/lu";
 import corpcommentImg from "@/public/corpcomment.png";
 import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
+import RTcodesImg from "@/public/RT-codes.png";
+import LLDImg from "@/public/LLD.png";
+import ApiImg from "@/public/api.png";
 
 export const links = [
   {
@@ -70,26 +73,27 @@ export const experiencesData = [
 
 export const projectsData = [
   {
-    title: "CorpComment",
+    title: "RT-codes webpage",
     description:
-      "I worked as a full-stack developer on this startup project for 2 years. Users can give public feedback to companies.",
-    tags: ["React", "Next.js", "MongoDB", "Tailwind", "Prisma"],
-    imageUrl: corpcommentImg,
+      "This website. Made to be responsive and fast. Using the latest Next.js features and deployed on Vercel.",
+    tags: ["Next.js", "React", "Typescript", "Tailwind", "Framermotion", "Vercel"],
+    imageUrl: RTcodesImg,
   },
   {
-    title: "rmtDev",
+    title: "LCB LED Europe webshops",
     description:
-      "Job board for remote developer jobs. I was the front-end developer. It has features like filtering, sorting and pagination.",
-    tags: ["React", "TypeScript", "Next.js", "Tailwind", "Redux"],
-    imageUrl: rmtdevImg,
+      "Webshops for LCB LED Europe. Maintained and developed new website features. mostly front-end work.",
+    tags: ["Lightspeed", "html", "css", "javascript"],
+    imageUrl: LLDImg,
   },
   {
-    title: "Word Analytics",
+    title: "langcorn sheets gen",
     description:
-      "A public web app for quick analytics on text. It shows word count, character count and social media post limits.",
-    tags: ["React", "Next.js", "SQL", "Tailwind", "Framer"],
-    imageUrl: wordanalyticsImg,
+      "A small ai driven test api project to chain together prompts and output to generate content",
+    tags: ["Fastapi", "Python", "Langcorn", "Lanchain"],
+    imageUrl: ApiImg,
   },
+
 ] as const;
 
 export const contactData = [
