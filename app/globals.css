@@ -5,3 +5,10 @@
 html {
     --line-color: #e5e7eb;
 }
+
+
+main {
+    overflow: hidden;
+    padding-left: 0rem !important;
+    padding-right: 0rem !important;
+}
