@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="!scroll-smooth">
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
 
       </head>
       <body className={`${inter.className} bg-gray-100 text-gray-950 relative pt-28 sm:p-36 sm:pb-0 m-0 w-[100%]`}>
