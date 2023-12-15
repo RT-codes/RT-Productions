@@ -14,7 +14,7 @@ export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
 
   return (
-    <section ref={ref} className="mb-28 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]" id="home">
+    <section ref={ref} className="mb-18 max-w-[50rem] text-center sm:mb-0 scroll-mt-[100rem]" id="home">
       <div className="flex items-center justify-center">
         <div className="relative">
           <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "tween", duration: 0.2 }}>
@@ -37,12 +37,14 @@ export default function Intro() {
         <a className="group bg-white text-black px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110  active:scale-105 transition cursor-pointer border border-black/10" href="/CV.pdf" download>
           Download CV <HiDownload className="opacity-60 group-hover:translate-y-1 transition" />
         </a>
+        <div className="flex gap-2 justify-center items-center p-6">
         <a className="bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer border border-black/10" href="https://www.linkedin.com/in/rowantijsterman/" target="_blank">
           <BsLinkedin />
         </a>
         <a className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950  active:scale-105 transition cursor-pointer border border-black/10" href="https://github.com/RT-codes" target="_blank">
           <FaGithubSquare />
         </a>
+        </div>
       </motion.div>
     </section>
   );

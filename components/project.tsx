@@ -46,10 +46,10 @@ export default function Project({ title, description, tags, imageUrl, childCount
         scale: scaleProgress,
         opacity: opacityProgress,
       }}
-      className="group mb-3 sm:mb-8 last:mb-0"
+      className="group mb-3 sm:mb-8 last:mb-0 "
     >
-      <section className="bg-gray-200 max-w-[42rem] border border-gray-300 overflow-hidden sm:pr-8 relative sm:h-[20rem]  group-even:pl-8 hover:bg-gray-300 transition">
-        <div className="pt-4 pb-7 px-5  sm:pr-2 sm:pt-10 sm:max-w-[50%] flex flex-col h-full group-even:ml-[18rem] ">
+      <section className="bg-gray-200 max-w-[42rem] border border-gray-300 overflow-hidden sm:pr-8 relative sm:h-[20rem]  group-even:pl-8 hover:bg-gray-300 transition h-[20rem] ">
+        <div className="pt-4 pb-7 px-5  sm:pr-2  sm:pt-10 sm:max-w-[50%] max-w-[80%] flex flex-col h-full sm:group-even:ml-[18rem] group-even:ml-[2rem] ">
           <h3 className="text-2xl font-semibold">{title}</h3>
           <p className="mt-2 leading-relaxed text-gray-700 ">{description}</p>
           <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
@@ -65,7 +65,7 @@ export default function Project({ title, description, tags, imageUrl, childCount
           src={imageUrl}
           alt="Project I worked on"
           quality={95}
-          className="absolute top-8 -right-40 w-[28.25rem] rounded-t-lg shadow-xl shadow-slate-600 group-even:right-[initial] group-even:-left-40 grou-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 transition group-hover:scale-[1.04]  
+          className="absolute top-8 -right-60 sm:-right-40 w-[28.25rem] rounded-t-lg shadow-xl shadow-slate-600 group-even:right-[initial] group-even:-left-60 group-even:sm:-left-40 group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 transition group-hover:scale-[1.04]  
       
       group-even:group-hover:translate-x-3
       group-even:group-hover:translate-y-3
