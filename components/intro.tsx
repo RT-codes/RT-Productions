@@ -34,7 +34,7 @@ export default function Intro() {
         <Link href="#contact" className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition ">
           Contact me here <BsArrowRight className="opacity-70 group-hover:translate-x-2 group-hover:text-[1.35rem] transition" />
         </Link>
-        <a className="group bg-white text-black px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110  active:scale-105 transition cursor-pointer border border-black/10" href="/CV.pdf" download>
+        <a className="group bg-white text-black px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110  active:scale-105 transition cursor-pointer border border-black/10" href="/CV-rowan.pdf" download>
           Download CV <HiDownload className="opacity-60 group-hover:translate-y-1 transition" />
         </a>
         <div className="flex gap-2 justify-center items-center p-6">
