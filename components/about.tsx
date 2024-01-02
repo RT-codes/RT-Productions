@@ -15,7 +15,7 @@ export default function About() {
         <span className="font-medium">I’m a developer with over 5 years of experience. During my time as a developer, I’ve worked on apps, games and web applications.</span>
         <span className="font-medium">With a background rooted in the game industry as an artist, I learned the latest tech and tools in the web industry to bring interactive visions to life.</span>
         <span className="italic"> I love data driven applications and automation so it might not come as a surprise I’m all over harnessing AI to achieve these goals when I get the chance.</span>
-        <span className="font-medium"> With an insatiable hunger for developing myself as a more adept developer i love the feeling of figuring out a solution to a problem.</span>
+        <span className="font-medium"> With an insatiable hunger for developing myself as a more adept developer. I love figuring out solutions and coming up with strategies to tackle technical challanges.</span>
       </motion.p>
     </section>
   );

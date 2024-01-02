@@ -6,14 +6,16 @@ import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeli
 import "react-vertical-timeline-component/style.min.css";
 import { experiencesData } from "@/lib/data";
 import { useInView } from "framer-motion";
+import { useSectionInView } from "@/lib/hooks";
 
 export default function Experience() {
   // const { ref, inView } = useInView({
   //     triggerOnce: true,
   // });
+  const { ref } = useSectionInView("Experience", 0.3);
 
   return (
-    <section id="experience" className="scroll-mt-28 mb-28 sm:mb-8">
+    <section ref={ref} id="experience" className="scroll-mt-28 mb-28 sm:mb-8">
       <SectionHeading>Experience</SectionHeading>
       <VerticalTimeline lineColor="">
         {experiencesData.map((item, index) => (
