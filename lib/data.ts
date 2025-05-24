@@ -40,96 +40,66 @@ export const experiencesData = [
   {
     title: "2007 - 2011 Grafisch Lyceum (Game Design)",
     location: "Utrecht - Netherlands",
-    description:
-      "Finished my Gamedesign and development study. Learned about 3D modeling, animation, game design, programming and more.",
+    description: "Finished my Gamedesign and development study. Learned about 3D modeling, animation, game design, programming and more.",
     icon: React.createElement(LuGraduationCap),
     date: "2007 - 2011",
   },
   {
     title: "Flow Studios",
     location: "Dutch Game Garden -> Utrecht - Netherlands",
-    description:
-      "Ran a small indie game studio called Flow studios for about 5 years. Nominated for best student learning company in the Netherlands, worked for several clients and platforms. Started as Concept Artist and Manager and eventually fulfilled many roles like 3d modeling and Programming.",
+    description: "Ran a small indie game studio called Flow studios for about 5 years. Nominated for best student learning company in the Netherlands, worked for several clients and platforms. Started as Concept Artist and Manager and eventually fulfilled many roles like 3d modeling and Programming.",
     icon: React.createElement(CgWorkAlt),
     date: "2011 - 2017",
   },
   {
     title: "Several non-tech jobs",
     location: "Netherlands",
-    description:
-      "Had several non-tech related jobs like Catering, Caretaker and designer at t-shirt printing company. For more info check my resume.",
+    description: "Had several non-tech related jobs like Catering, Caretaker and designer at t-shirt printing company. For more info check my resume.",
     icon: React.createElement(CgWorkAlt),
-    date: "2017 - 2021", 
+    date: "2017 - 2021",
   },
   {
     title: "Full-stack/Lead Developer - LCB LED Europe",
     location: "Almere - Netherlands",
-    description:
-      "Worked as a full-stack developer on the company websites and stores (mainly runs on lightspeed). Worked on internal tools to upload and maintain product data and specifications to handle huge amounts of products per store. Took care of most api integrations, styles and front-end changes.",
+    description: "Worked as a full-stack developer on the company websites and stores (mainly runs on lightspeed). Worked on internal tools to upload and maintain product data and specifications to handle huge amounts of products per store. Took care of most api integrations, styles and front-end changes.",
     icon: React.createElement(FaCog),
-    date: "2021 - 2023",
+    date: "2021 - 2024",
+  },
+  {
+    title: "Full-stack Developer - Volcano",
+    location: "Apeldoorn - Netherlands",
+    description: "Worked as a full-stack developer on the company websites and stores (mainly runs on lightspeed). Worked on internal tools to upload and maintain product data and specifications to handle huge amounts of products per store. Took care of most api integrations, styles and front-end changes.",
+    icon: React.createElement(FaCog),
+    date: "2025 - 2025",
   },
 ] as const;
 
 export const projectsData = [
   {
     title: "RT-codes webpage",
-    description:
-      "This website. Made to be responsive and fast. Using the latest Next.js features and deployed on Vercel.",
+    description: "This website. Made to be responsive and fast. Using the latest Next.js features and deployed on Vercel.",
     tags: ["Next.js", "React", "Typescript", "Tailwind", "Framermotion", "Vercel"],
     imageUrl: RTcodesImg,
   },
   {
     title: "LCB LED Europe webshops",
-    description:
-      "Webshops for LCB LED Europe. Maintained and developed new website features. mostly front-end work.",
+    description: "Webshops for LCB LED Europe. Maintained and developed new website features. mostly front-end work.",
     tags: ["Lightspeed", "html", "css", "javascript"],
     imageUrl: LLDImg,
   },
   {
     title: "langcorn sheets gen",
-    description:
-      "A small ai driven test api project to chain together prompts and output to generate content",
+    description: "A small ai driven test api project to chain together prompts and output to generate content",
     tags: ["Fastapi", "Python", "Langcorn", "Lanchain"],
     imageUrl: ApiImg,
   },
-
 ] as const;
 
 export const contactData = [
   {
     email: "rowan.nicolay@gmail.com",
-    tagline: "Website runs on Nextjs/React and ☕️ - Deployed on Vercel - Made by Rowan"
-  }
-]
+    tagline: "Website runs on Nextjs/React and ☕️ - Deployed on Vercel - Made by Rowan",
+  },
+];
 
-export const skillsData = [
-  "HTML",
-  "CSS",
-  "JavaScript",
-  "Python",
-  "React",
-  "Next.js",
-  "Node.js",
-  "TypeScript",
-  "Git",
-  "Tailwind",
-  "C#",
-  "Photoshop",
-  "Illustrator",
-  "Figma",
-  "Flutter",
-  "PostgreSQL",
-  "Python",
-  "Django",
-  "Vim / Neovim",
-  "Unity",
-  "Blender",
-  "ZBrush",
-  "Cinema 4D",
-  "Maya",
-  "3DS Max",
-  "Unreal Engine",
-  "Debian",
-
-] as const;
+export const skillsData = ["HTML", "CSS", "JavaScript", "Python", "React", "Svelte", "Next.js", "Payload", "Node.js", "TypeScript", "Git", "Tailwind", "MongoDB", "C#", "Photoshop", "Illustrator", "Figma", "Flutter", "PostgreSQL", "Python", "Django", "Vim / Neovim", "Unity", "Blender", "ZBrush", "Cinema 4D", "Maya", "3DS Max", "Unreal Engine", "Debian"] as const;

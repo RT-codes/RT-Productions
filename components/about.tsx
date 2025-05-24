@@ -12,10 +12,7 @@ export default function About() {
     <section ref={ref} className="p-12 max-w-[45rem] leading-8 scroll-mt-28" id="about">
       <SectionHeading>About</SectionHeading>
       <motion.p initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, bounce: 0.25, delay: 0.16 }}>
-        <span className="font-medium">I’m a developer with over 5 years of experience. During my time as a developer, I’ve worked on apps, games and web applications.</span>
-        <span className="font-medium">With a background rooted in the game industry as an artist, I learned the latest tech and tools in the web industry to bring interactive visions to life.</span>
-        <span className="italic"> I love data driven applications and automation so it might not come as a surprise I’m all over harnessing AI to achieve these goals when I get the chance.</span>
-        <span className="font-medium"> With an insatiable hunger for developing myself as a more adept developer. I love figuring out solutions and coming up with strategies to tackle technical challanges.</span>
+        I'm a full-stack developer and creative product builder with a strong foundation in game design and a passion for crafting innovative digital experiences. With over 5 years of experience, I've developed web applications, internal tools, and AI-driven solutions that enhance user engagement and streamline processes. I've embraced modern frameworks like Svelte, Next.js, and worked with TypeScript, Python and many more to support these projects and continuously evolve my development approach.<span className="italic"> I thrive on solving complex problems and continuously seek opportunities to learn and grow. </span> Whether it's enhancing user interfaces, developing scalable backend systems, or exploring new AI capabilities, I'm always looking for ways to improve the development process and create meaningful solutions that make a difference.
       </motion.p>
     </section>
   );
