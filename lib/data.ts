@@ -68,7 +68,14 @@ export const experiencesData = [
   {
     title: "Full-stack Developer - Volcano",
     location: "Apeldoorn - Netherlands",
-    description: "Worked as a full-stack developer on the company websites and stores (mainly runs on lightspeed). Worked on internal tools to upload and maintain product data and specifications to handle huge amounts of products per store. Took care of most api integrations, styles and front-end changes.",
+    description: "Worked as a Full-Stack Developer on data-driven web applications, using Svelte, TypeScript, Payload CMS, and MongoDB. My work also included developing custom role-based access control systems and integrating frontend and backend functionality.",
+    icon: React.createElement(FaCog),
+    date: "2024 - 2025",
+  },
+  {
+    title: "Data Automation Engineer - Boostix",
+    location: "Amersfoort - Netherlands",
+    description: "Working as a Data Automation Engineer, designing and developing cloud-based data solutions within the Microsoft Azure ecosystem. My work focuses on data pipelines, data lakes, high-volume data processing, automation, edge functions, CI/CD pipelines, and real-time dashboards using Azure, Python, and SQL.",
     icon: React.createElement(FaCog),
     date: "2025 - 2025",
   },
