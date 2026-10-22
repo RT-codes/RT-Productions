@@ -88,24 +88,28 @@ export const projectsData = [
     description: "Self-hosted control room for AI agents: scheduled jobs, workflows and webhooks, each run sandboxed in Docker.",
     tags: ["Python", "Svelte", "TypeScript", "Docker"],
     imageUrl: ThemisImg,
+    url: "https://github.com/RT-codes/ThemisForge",
   },
   {
     title: "Hermes Home",
     description: "Household interface for a local AI stack: chat, system monitoring and an interactive 3D memory graph.",
     tags: ["React", "TypeScript", "Vite", "Three.js"],
     imageUrl: HermesHomeImg,
+    url: "https://github.com/RT-codes/hermes-ai-frontend",
   },
   {
     title: "RT-codes webpage",
     description: "This website. Made to be responsive and fast. Using the latest Next.js features and deployed on Vercel.",
     tags: ["Next.js", "React", "Typescript", "Tailwind", "Framermotion", "Vercel"],
     imageUrl: RTcodesImg,
+    url: "https://github.com/RT-codes/RT-Productions",
   },
   {
     title: "LCB LED Europe webshops",
     description: "Webshops for LCB LED Europe. Maintained and developed new website features. mostly front-end work.",
     tags: ["Lightspeed", "html", "css", "javascript"],
     imageUrl: LLDImg,
+    url: "https://www.ledlichtdiscounter.nl",
   },
 ] as const;
 

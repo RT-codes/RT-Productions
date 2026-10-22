@@ -9,7 +9,7 @@ import { off } from "process";
 
 type ProjectProps = typeof projectsData[number] & { childCount: number };
 
-export default function Project({ title, description, tags, imageUrl, childCount }: ProjectProps) {
+export default function Project({ title, description, tags, imageUrl, url, childCount }: ProjectProps) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const controls = useAnimation();
@@ -43,7 +43,7 @@ export default function Project({ title, description, tags, imageUrl, childCount
       }}
       className="group mb-3 sm:mb-8 last:mb-0 "
     >
-      <section className="bg-gray-200 dark:bg-white/10 max-w-[42rem] border border-gray-300 dark:border-white/10 overflow-hidden sm:pr-8 relative sm:h-[20rem]  group-even:pl-8 hover:bg-gray-300 dark:hover:bg-white/20 transition h-[20rem] ">
+      <a href={url} target="_blank" rel="noopener noreferrer" className="block outline-none focus-visible:ring-2 focus-visible:ring-gray-400 bg-gray-200 dark:bg-white/10 max-w-[42rem] border border-gray-300 dark:border-white/10 overflow-hidden sm:pr-8 relative sm:h-[20rem]  group-even:pl-8 hover:bg-gray-300 dark:hover:bg-white/20 transition h-[20rem] ">
         <div className="pt-4 pb-7 px-5  sm:pr-2  sm:pt-10 sm:max-w-[50%] max-w-[80%] flex flex-col h-full sm:group-even:ml-[18rem] group-even:ml-[2rem] ">
           <h3 className="text-2xl font-semibold">{title}</h3>
           <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 ">{description}</p>
@@ -68,7 +68,7 @@ export default function Project({ title, description, tags, imageUrl, childCount
       
       "
         />
-      </section>
+      </a>
     </motion.div>
   );
 }
