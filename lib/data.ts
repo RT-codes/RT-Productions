@@ -7,6 +7,8 @@ import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
 import RTcodesImg from "@/public/RT-codes.png";
 import LLDImg from "@/public/LLD.png";
+import ThemisImg from "@/public/Themis.jpg";
+import HermesHomeImg from "@/public/HermesHome.png";
 
 export const links = [
   {
@@ -81,6 +83,18 @@ export const experiencesData = [
 ] as const;
 
 export const projectsData = [
+  {
+    title: "Themis",
+    description: "Self-hosted control room for AI agents: scheduled jobs, workflows and webhooks, each run sandboxed in Docker.",
+    tags: ["Python", "Svelte", "TypeScript", "Docker"],
+    imageUrl: ThemisImg,
+  },
+  {
+    title: "Hermes Home",
+    description: "Household interface for a local AI stack: chat, system monitoring and an interactive 3D memory graph.",
+    tags: ["React", "TypeScript", "Vite", "Three.js"],
+    imageUrl: HermesHomeImg,
+  },
   {
     title: "RT-codes webpage",
     description: "This website. Made to be responsive and fast. Using the latest Next.js features and deployed on Vercel.",
