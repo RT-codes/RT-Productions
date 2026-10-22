@@ -47,7 +47,7 @@ export default function Project({ title, description, summary, highlights, tags,
           src={imageUrl}
           alt={`Screenshot of ${title}`}
           quality={95}
-          className={`mx-auto mt-6 h-auto w-[calc(100%-2.5rem)] rounded-t-lg shadow-xl shadow-slate-600 transition motion-safe:group-hover/card:translate-y-2 motion-safe:group-hover/card:scale-[1.03] sm:absolute sm:top-8 sm:m-0 sm:w-[28.25rem] motion-safe:sm:group-hover/card:translate-y-3 motion-safe:sm:group-hover/card:scale-[1.04] ${
+          className={`mx-auto mt-6 h-auto w-[calc(100%-2.5rem)] rounded-t-lg shadow-xl shadow-black/40 transition motion-safe:group-hover/card:translate-y-2 motion-safe:group-hover/card:scale-[1.03] sm:absolute sm:top-8 sm:m-0 sm:w-[28.25rem] motion-safe:sm:group-hover/card:translate-y-3 motion-safe:sm:group-hover/card:scale-[1.04] ${
             isEven ? "sm:-left-40 motion-safe:sm:group-hover/card:translate-x-3 motion-safe:sm:group-hover/card:rotate-2" : "sm:-right-40 motion-safe:sm:group-hover/card:-translate-x-3 motion-safe:sm:group-hover/card:-rotate-2"
           }`}
         />

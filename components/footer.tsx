@@ -19,7 +19,7 @@ export default function Footer() {
                     <div className='flex justify-center items-center  text-2xl bg-white dark:bg-gray-800 dark:border-gray-700 w-[4rem] h-[4rem] rounded-[100%] border-4 box-border'>
                         <FaEnvelope /> 
                     </div>
-                    <div className='block bg-slate-200 dark:bg-gray-800 hover:bg-slate-600/[0.1] dark:hover:bg-gray-700 transition-all duration-300  p-[1rem] hover:font-bold  text-slate-400 dark:text-slate-300'>
+                    <div className='block bg-slate-200 dark:bg-gray-800 hover:bg-slate-600/[0.1] dark:hover:bg-gray-700 transition-all duration-300  p-[1rem] hover:font-bold  text-slate-400 dark:text-gray-400'>
                             <p>Email now</p>
                     </div>
                 </a>

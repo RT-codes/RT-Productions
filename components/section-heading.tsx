@@ -8,6 +8,7 @@ import { usePrefersReducedMotion } from "@/lib/hooks";
 
 const WORDS_PER_HEADING = 2;
 const WORD_MS = 550;
+const REVEAL_MS = 600;
 type SectionHeadingProps = {
   children: React.ReactNode;
   /** Called once the heading has finished thinking and settled. */
@@ -33,13 +34,13 @@ export default function SectionHeading({ children, onSettled }: SectionHeadingPr
   const { ref } = useInView({
     threshold: 0.8,
     triggerOnce: true,
-    onChange: (inView) => {
-      if (!inView) return;
-      if (reduceMotion) {
-        setPhase("done");
-        onSettledRef.current?.();
+    onChange: (inView, entry) => {
+      if (!inView) {
+        // Already scrolled past (e.g. the scroll position was restored below it): skip the show.
+        if (entry.boundingClientRect.bottom < 0) setPhase((current) => (current === "idle" ? "done" : current));
         return;
       }
+      if (reduceMotion) return setPhase("done");
       setWords(pickWords());
       setStep(0);
       setPhase("thinking");
@@ -51,16 +52,22 @@ export default function SectionHeading({ children, onSettled }: SectionHeadingPr
     const id = setTimeout(() => {
       if (step + 1 < words.length) return setStep(step + 1);
       setPhase("done");
-      onSettledRef.current?.();
     }, WORD_MS);
     return () => clearTimeout(id);
   }, [phase, step, words.length]);
+
+  // Tell the parent once the real heading has finished fading in.
+  useEffect(() => {
+    if (phase !== "done") return;
+    const id = setTimeout(() => onSettledRef.current?.(), reduceMotion ? 0 : REVEAL_MS);
+    return () => clearTimeout(id);
+  }, [phase, reduceMotion]);
 
   const settled = phase === "done" || reduceMotion;
 
   return (
     <h2 ref={ref} className="relative mb-8 text-center text-3xl font-medium capitalize">
-      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }}>
+      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: reduceMotion ? 0 : REVEAL_MS / 1000, ease: "easeOut" }}>
         {children}
       </motion.span>
       <AnimatePresence mode="wait">
