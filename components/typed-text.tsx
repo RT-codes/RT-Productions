@@ -25,11 +25,17 @@ export default function TypedText({ blocks, start }: TypedTextProps) {
   const [typed, setTyped] = useState(0);
   const total = blocks.reduce((sum, block) => sum + block.segments.reduce((n, s) => n + s.text.length, 0), 0);
 
+  // Once reduced motion has been seen, the text stays fully shown even if the preference is switched off again.
+  if (reduceMotion && phase !== "finished") {
+    setPhase("finished");
+    setTyped(total);
+  }
+
   useEffect(() => {
-    if (!start || reduceMotion) return;
+    if (!start || reduceMotion || phase !== "idle") return;
     const timer = setTimeout(() => setPhase("typing"), BLINK_MS);
     return () => clearTimeout(timer);
-  }, [start, reduceMotion]);
+  }, [start, reduceMotion, phase]);
 
   useEffect(() => {
     if (phase !== "typing") return;

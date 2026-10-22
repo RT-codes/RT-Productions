@@ -31,6 +31,9 @@ export default function SectionHeading({ children, onSettled }: SectionHeadingPr
     onSettledRef.current = onSettled;
   });
 
+  // Once reduced motion has been seen, the heading stays settled even if the preference is switched off again.
+  if (reduceMotion && phase !== "done") setPhase("done");
+
   const { ref } = useInView({
     threshold: 0.8,
     triggerOnce: true,
@@ -61,7 +64,7 @@ export default function SectionHeading({ children, onSettled }: SectionHeadingPr
 
   return (
     <h2 ref={ref} className="relative mb-8 text-center text-3xl font-medium capitalize">
-      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: reduceMotion ? 0 : REVEAL_MS / 1000, ease: "easeOut" }} onAnimationComplete={() => settled && phase !== "thinking" && onSettledRef.current?.()}>
+      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: reduceMotion ? 0 : REVEAL_MS / 1000, ease: "easeOut" }} onAnimationComplete={() => settled && onSettledRef.current?.()}>
         {children}
       </motion.span>
       <AnimatePresence mode="wait">
