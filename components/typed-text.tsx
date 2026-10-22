@@ -5,7 +5,8 @@ import clsx from "clsx";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 
 export type Segment = { text: string; className?: string };
-export type Block = { className?: string; segments: Segment[] };
+/** `rule` draws a thin divider line above the block once the typing reaches it. */
+export type Block = { className?: string; segments: Segment[]; rule?: boolean };
 
 type TypedTextProps = {
   blocks: Block[];
@@ -77,23 +78,29 @@ export default function TypedText({ blocks, start }: TypedTextProps) {
 
   return (
     <>
-      {blocks.map((block, blockIndex) => (
-        <p key={blockIndex} className={clsx(block.className, blockStarts[blockIndex] > 0 && blockStarts[blockIndex] >= count && "!border-transparent")}>
-          {block.segments.map((segment, segmentIndex) => {
-            const visible = Math.max(0, Math.min(segment.text.length, count - segmentStart));
-            const hasCursor = showCursor && index === cursorSegment;
-            segmentStart += segment.text.length;
-            index++;
-            return (
-              <span key={segmentIndex} className={segment.className}>
-                {segment.text.slice(0, visible)}
-                {hasCursor && <span aria-hidden className={clsx("typed-cursor", phase === "typing" && "typed-cursor-solid")} />}
-                <span className="opacity-0">{segment.text.slice(visible)}</span>
-              </span>
-            );
-          })}
-        </p>
-      ))}
+      {blocks.map((block, blockIndex) => {
+        const reached = blockStarts[blockIndex] === 0 || blockStarts[blockIndex] < count;
+        return (
+          <React.Fragment key={blockIndex}>
+            {block.rule && <div aria-hidden className={clsx("h-px origin-left bg-black/10 transition-transform duration-700 ease-out motion-reduce:transition-none dark:bg-white/10", reached ? "scale-x-100" : "scale-x-0")} />}
+            <p className={clsx(block.className, !reached && "!border-transparent")}>
+              {block.segments.map((segment, segmentIndex) => {
+                const visible = Math.max(0, Math.min(segment.text.length, count - segmentStart));
+                const hasCursor = showCursor && index === cursorSegment;
+                segmentStart += segment.text.length;
+                index++;
+                return (
+                  <span key={segmentIndex} className={segment.className}>
+                    {segment.text.slice(0, visible)}
+                    {hasCursor && <span aria-hidden className={clsx("typed-cursor", phase === "typing" && "typed-cursor-solid")} />}
+                    <span className="opacity-0">{segment.text.slice(visible)}</span>
+                  </span>
+                );
+              })}
+            </p>
+          </React.Fragment>
+        );
+      })}
     </>
   );
 }
