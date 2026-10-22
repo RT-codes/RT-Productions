@@ -19,9 +19,8 @@ export default function Project({ title, description, summary, highlights, tags,
   const isEven = index % 2 === 1;
 
   // Once the row is reached, the panel is uncovered from the card's edge in one go: sideways on xl, downward when stacked.
-  const clip = isEven
-    ? revealed ? "[clip-path:inset(0)]" : "[clip-path:inset(0_0_100%_0)] xl:[clip-path:inset(0_0_0_100%)]"
-    : revealed ? "[clip-path:inset(0)]" : "[clip-path:inset(0_0_100%_0)] xl:[clip-path:inset(0_100%_0_0)]";
+  const hiddenClip = isEven ? "[clip-path:inset(0_0_100%_0)] xl:[clip-path:inset(0_0_0_100%)]" : "[clip-path:inset(0_0_100%_0)] xl:[clip-path:inset(0_100%_0_0)]";
+  const clip = revealed ? "[clip-path:inset(0)]" : hiddenClip;
 
   return (
     <div ref={ref} className={`flex flex-col items-center gap-4 xl:flex-row xl:gap-0 ${isEven ? "xl:flex-row-reverse" : ""}`}>
