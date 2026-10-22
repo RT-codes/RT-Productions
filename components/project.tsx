@@ -1,55 +1,43 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { projectsData } from "@/lib/data";
+import { useRef } from "react";
 import Image from "next/image";
-import { motion, useAnimation, useScroll } from "framer-motion";
-import { useTransform } from "framer-motion";
-import { off } from "process";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { FiArrowUpRight, FiCheck } from "react-icons/fi";
+import { projectsData } from "@/lib/data";
 
-type ProjectProps = typeof projectsData[number] & { childCount: number };
+type ProjectProps = (typeof projectsData)[number] & { index: number; total: number };
 
-export default function Project({ title, description, tags, imageUrl, url, childCount }: ProjectProps) {
+const pad = (n: number) => String(n).padStart(2, "0");
+
+export default function Project({ title, description, summary, highlights, tags, imageUrl, url, linkLabel, index, total }: ProjectProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll();
-  const controls = useAnimation();
-  const offset = (childCount * childCount) / 20;
+  const reduceMotion = useReducedMotion();
+  // Even rows put the card on the right and slide the panel in from the left (and vice versa).
+  const isEven = index % 2 === 1;
+  const slide = isEven ? -64 : 64;
 
-  //   useScroll({
-  //     target: ref,
-  //     offset: ["0 1", "1.33 1"],
-  //   });
-  //   let scaleProgress = useTransform(scrollYProgress, [0, 1], [0.8, 1]);
-  //   let opacityProgress = useTransform(scrollYProgress, [0, 1], [0.6, 1]);
-
-  useEffect(() => {
-    controls.start({
-      transition: { delay: offset },
-    });
-  }, [controls, offset]);
-
-  console.log("offset", offset);
-
-  let scaleProgress = useTransform(scrollYProgress, [0, 0.6 + (offset*2)], [0.6, 1]);
-  let opacityProgress = useTransform(scrollYProgress, [0, 0.6 + offset], [0.4, 1]);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 95%", "start 40%"] });
+  const panelX = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : slide, 0]);
+  const panelOpacity = useTransform(scrollYProgress, [0, 0.7], [reduceMotion ? 1 : 0, 1]);
+  const cardScale = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 1 : 0.94, 1]);
 
   return (
-    <motion.div
-      ref={ref}
-      animate={controls}
-      style={{
-        scale: scaleProgress,
-        opacity: opacityProgress,
-      }}
-      className="group mb-3 sm:mb-8 last:mb-0 "
-    >
-      <a href={url} target="_blank" rel="noopener noreferrer" className="block outline-none focus-visible:ring-2 focus-visible:ring-gray-400 bg-gray-200 dark:bg-white/10 max-w-[42rem] border border-gray-300 dark:border-white/10 overflow-hidden sm:pr-8 relative sm:h-[20rem]  group-even:pl-8 hover:bg-gray-300 dark:hover:bg-white/20 transition h-[20rem] ">
-        <div className="pt-4 pb-7 px-5  sm:pr-2  sm:pt-10 sm:max-w-[50%] max-w-[80%] flex flex-col h-full sm:group-even:ml-[18rem] group-even:ml-[2rem] ">
+    <div ref={ref} className={`flex flex-col items-center gap-4 xl:flex-row xl:gap-0 ${isEven ? "xl:flex-row-reverse" : ""}`}>
+      <motion.a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={`${title} (opens in a new tab)`}
+        style={{ scale: cardScale }}
+        className="group/card relative block w-full sm:h-[20rem] max-w-[42rem] shrink-0 overflow-hidden border border-gray-300 bg-gray-200 outline-none transition hover:bg-gray-300 focus-visible:ring-2 focus-visible:ring-gray-400 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/20 sm:pr-8"
+      >
+        <div className={`flex flex-col px-5 pt-5 sm:h-full sm:max-w-[50%] sm:pb-7 sm:pr-2 sm:pt-10 ${isEven ? "sm:ml-[18rem]" : ""}`}>
           <h3 className="text-2xl font-semibold">{title}</h3>
-          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 ">{description}</p>
-          <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
-            {tags.map((tag, index) => (
-              <li className="bg-black/[0.7] dark:bg-white/10 dark:text-white/80 px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full" key={index}>
+          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70">{description}</p>
+          <ul className="mt-4 flex flex-wrap gap-2 sm:mt-auto">
+            {tags.map((tag) => (
+              <li key={tag} className="rounded-full bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white dark:bg-white/10 dark:text-white/80">
                 {tag}
               </li>
             ))}
@@ -58,17 +46,46 @@ export default function Project({ title, description, tags, imageUrl, url, child
 
         <Image
           src={imageUrl}
-          alt="Project I worked on"
+          alt={`Screenshot of ${title}`}
           quality={95}
-          className="absolute top-8 -right-60 sm:-right-40 w-[28.25rem] rounded-t-lg shadow-xl shadow-slate-600 group-even:right-[initial] group-even:-left-60 group-even:sm:-left-40 group-hover:-translate-x-3 group-hover:translate-y-3 group-hover:-rotate-2 transition group-hover:scale-[1.04]  
-      
-      group-even:group-hover:translate-x-3
-      group-even:group-hover:translate-y-3
-      group-even:group-hover:rotate-2
-      
-      "
+          className={`mx-auto mt-6 h-auto w-[calc(100%-2.5rem)] rounded-t-lg shadow-xl shadow-slate-600 transition group-hover/card:translate-y-2 group-hover/card:scale-[1.03] sm:absolute sm:top-8 sm:m-0 sm:w-[28.25rem] sm:group-hover/card:translate-y-3 sm:group-hover/card:scale-[1.04] ${
+            isEven ? "sm:-left-40 sm:group-hover/card:translate-x-3 sm:group-hover/card:rotate-2" : "sm:-right-40 sm:group-hover/card:-translate-x-3 sm:group-hover/card:-rotate-2"
+          }`}
         />
-      </a>
-    </motion.div>
+      </motion.a>
+
+      <motion.aside
+        style={{ x: panelX, opacity: panelOpacity }}
+        className={`relative flex w-full max-w-[42rem] flex-col gap-4 border border-gray-300 bg-white/60 p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] xl:max-w-none xl:flex-1 xl:self-stretch xl:justify-center xl:p-8 ${
+          isEven ? "xl:border-r-0" : "xl:border-l-0"
+        }`}
+      >
+        <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gray-900 dark:bg-white/70" />
+
+        <p className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 dark:text-white/50">
+          Project {pad(index + 1)} <span className="opacity-60">/ {pad(total)}</span>
+        </p>
+        <p className="leading-relaxed text-gray-700 dark:text-white/70">{summary}</p>
+
+        <ul className="flex flex-col gap-2">
+          {highlights.map((item) => (
+            <li key={item} className="flex items-start gap-3 text-sm text-gray-700 dark:text-white/80">
+              <FiCheck aria-hidden className="mt-0.5 shrink-0 text-base text-gray-900 dark:text-white" />
+              {item}
+            </li>
+          ))}
+        </ul>
+
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group/link mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white outline-none transition hover:bg-gray-950 focus-visible:ring-2 focus-visible:ring-gray-400 dark:bg-white/10 dark:hover:bg-white/20"
+        >
+          {linkLabel}
+          <FiArrowUpRight aria-hidden className="transition group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+        </a>
+      </motion.aside>
+    </div>
   );
 }
