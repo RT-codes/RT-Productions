@@ -7,7 +7,6 @@ import rmtdevImg from "@/public/rmtdev.png";
 import wordanalyticsImg from "@/public/wordanalytics.png";
 import RTcodesImg from "@/public/RT-codes.png";
 import LLDImg from "@/public/LLD.png";
-import ApiImg from "@/public/Api.png";
 
 export const links = [
   {
@@ -93,12 +92,6 @@ export const projectsData = [
     description: "Webshops for LCB LED Europe. Maintained and developed new website features. mostly front-end work.",
     tags: ["Lightspeed", "html", "css", "javascript"],
     imageUrl: LLDImg,
-  },
-  {
-    title: "langcorn sheets gen",
-    description: "A small ai driven test api project to chain together prompts and output to generate content",
-    tags: ["Fastapi", "Python", "Langcorn", "Lanchain"],
-    imageUrl: ApiImg,
   },
 ] as const;
 
