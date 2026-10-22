@@ -43,13 +43,13 @@ export default function Project({ title, description, tags, imageUrl, childCount
       }}
       className="group mb-3 sm:mb-8 last:mb-0 "
     >
-      <section className="bg-gray-200 max-w-[42rem] border border-gray-300 overflow-hidden sm:pr-8 relative sm:h-[20rem]  group-even:pl-8 hover:bg-gray-300 transition h-[20rem] ">
+      <section className="bg-gray-200 dark:bg-white/10 max-w-[42rem] border border-gray-300 dark:border-white/10 overflow-hidden sm:pr-8 relative sm:h-[20rem]  group-even:pl-8 hover:bg-gray-300 dark:hover:bg-white/20 transition h-[20rem] ">
         <div className="pt-4 pb-7 px-5  sm:pr-2  sm:pt-10 sm:max-w-[50%] max-w-[80%] flex flex-col h-full sm:group-even:ml-[18rem] group-even:ml-[2rem] ">
           <h3 className="text-2xl font-semibold">{title}</h3>
-          <p className="mt-2 leading-relaxed text-gray-700 ">{description}</p>
+          <p className="mt-2 leading-relaxed text-gray-700 dark:text-white/70 ">{description}</p>
           <ul className="flex flex-wrap mt-4 gap-2 sm:mt-auto">
             {tags.map((tag, index) => (
-              <li className="bg-black/[0.7] px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full" key={index}>
+              <li className="bg-black/[0.7] dark:bg-white/10 dark:text-white/80 px-3 py-1 text-[0.7rem] uppercase tracking-wider text-white rounded-full" key={index}>
                 {tag}
               </li>
             ))}

@@ -18,7 +18,7 @@ export default function Intro() {
       <div className="flex items-center justify-center">
         <div className="relative">
           <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "tween", duration: 0.2 }}>
-            <Image src={avatar} alt="Rowan portrait" width={192} height={192} quality={95} priority={true} className="h-24 w-24 rounded-full border-[0.35rem] border-white object-cover shadow-xl" />
+            <Image src={avatar} alt="Rowan portrait" width={192} height={192} quality={95} priority={true} className="h-24 w-24 rounded-full border-[0.35rem] border-white dark:border-gray-700 object-cover shadow-xl" />
           </motion.div>
           <motion.span className="text-2xl absolute bottom-0 right-0" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 125, delay: 0.5, duration: 0.7 }}>
             👋
@@ -36,17 +36,17 @@ export default function Intro() {
       </motion.h1>
 
       <motion.div className=" flex flex-col sm:flex-row items-center justify-center gap-4 px-4 text-lg font-medium " initial={{ opacity: 0, y: 100 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, bounce: 0.25, delay: 0.1 }}>
-        <Link href="#contact" className="group bg-gray-900 text-white px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 active:scale-105 transition ">
+        <Link href="#contact" className="group bg-gray-900 text-white dark:bg-white/10 px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110 hover:bg-gray-950 dark:hover:bg-white/20 active:scale-105 transition ">
           Contact me here <BsArrowRight className="opacity-70 group-hover:translate-x-2 group-hover:text-[1.35rem] transition" />
         </Link>
-        <a className="group bg-white text-black px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110  active:scale-105 transition cursor-pointer border border-black/10" href="/CV-rowan.pdf" download>
+        <a className="group bg-white text-black dark:bg-white/10 dark:text-white/80 px-7 py-3 flex items-center gap-2 rounded-full outline-none focus:scale-110 hover:scale-110  active:scale-105 transition cursor-pointer border border-black/10 dark:border-white/10" href="/CV-rowan.pdf" download>
           Download CV <HiDownload className="opacity-60 group-hover:translate-y-1 transition" />
         </a>
         <div className="flex gap-2 justify-center items-center p-6">
-          <a className="bg-white p-4 text-gray-700 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 active:scale-105 transition cursor-pointer border border-black/10" aria-label="link to LinkedIn page" href="https://www.linkedin.com/in/rowantijsterman/" target="_blank">
+          <a className="bg-white p-4 text-gray-700 dark:bg-white/10 dark:text-white/60 flex items-center gap-2 rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 dark:hover:text-white active:scale-105 transition cursor-pointer border border-black/10 dark:border-white/10" aria-label="link to LinkedIn page" href="https://www.linkedin.com/in/rowantijsterman/" target="_blank">
             <BsLinkedin />
           </a>
-          <a className="bg-white p-4 text-gray-700 flex items-center gap-2 text-[1.35rem] rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950  active:scale-105 transition cursor-pointer border border-black/10" aria-label="link to Github page" href="https://github.com/RT-codes" target="_blank">
+          <a className="bg-white p-4 text-gray-700 dark:bg-white/10 dark:text-white/60 flex items-center gap-2 text-[1.35rem] rounded-full outline-none focus:scale-[1.15] hover:scale-[1.15] hover:text-gray-950 dark:hover:text-white active:scale-105 transition cursor-pointer border border-black/10 dark:border-white/10" aria-label="link to Github page" href="https://github.com/RT-codes" target="_blank">
             <FaGithubSquare />
           </a>
         </div>
