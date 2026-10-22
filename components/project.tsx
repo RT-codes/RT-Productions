@@ -1,8 +1,7 @@
 "use client";
 
-import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform, type MotionStyle } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import { FiArrowUpRight, FiCheck } from "react-icons/fi";
 import { projectsData } from "@/lib/data";
 import { usePrefersReducedMotion } from "@/lib/hooks";
@@ -12,21 +11,21 @@ type ProjectProps = (typeof projectsData)[number] & { index: number; total: numb
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Project({ title, description, summary, highlights, tags, imageUrl, url, linkLabel, index, total }: ProjectProps) {
-  const panelRef = useRef<HTMLElement>(null);
+  const { ref, inView } = useInView({ threshold: 0.35, rootMargin: "0px 0px -15% 0px", triggerOnce: true });
   const reduceMotion = usePrefersReducedMotion();
+  const revealed = inView || reduceMotion;
 
   // Even rows put the card on the right and the panel on the left (and vice versa).
   const isEven = index % 2 === 1;
 
-  // The panel is uncovered from the card's edge as it scrolls into view: nothing moves, so it never bumps into the card.
-  const { scrollYProgress } = useScroll({ target: panelRef, offset: ["start 95%", "start 50%"] });
-  const reveal = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 1 : 0, 1]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [reduceMotion ? 1 : 0, 1]);
-  const panelStyle = { "--reveal": reveal, opacity } as MotionStyle;
+  // Once the row is reached, the panel is uncovered from the card's edge in one go: sideways on xl, downward when stacked.
+  const clip = isEven
+    ? revealed ? "[clip-path:inset(0)]" : "[clip-path:inset(0_0_100%_0)] xl:[clip-path:inset(0_0_0_100%)]"
+    : revealed ? "[clip-path:inset(0)]" : "[clip-path:inset(0_0_100%_0)] xl:[clip-path:inset(0_100%_0_0)]";
 
   return (
-    <div className={`flex flex-col items-center gap-4 xl:flex-row xl:gap-0 ${isEven ? "xl:flex-row-reverse" : ""}`}>
-      <motion.a
+    <div ref={ref} className={`flex flex-col items-center gap-4 xl:flex-row xl:gap-0 ${isEven ? "xl:flex-row-reverse" : ""}`}>
+      <a
         href={url}
         target="_blank"
         rel="noopener noreferrer"
@@ -53,21 +52,19 @@ export default function Project({ title, description, summary, highlights, tags,
             isEven ? "sm:-left-40 motion-safe:sm:group-hover/card:translate-x-3 motion-safe:sm:group-hover/card:rotate-2" : "sm:-right-40 motion-safe:sm:group-hover/card:-translate-x-3 motion-safe:sm:group-hover/card:-rotate-2"
           }`}
         />
-      </motion.a>
+      </a>
 
-      <motion.aside
-        ref={panelRef}
-        style={panelStyle}
-        className={`relative flex w-full max-w-[42rem] flex-col gap-4 border border-gray-300 bg-white/60 p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] xl:max-w-none xl:flex-1 xl:self-stretch xl:justify-center xl:p-8 ${
-          isEven ? "xl:border-r-0 xl:[clip-path:inset(0_0_0_calc(100%*(1-var(--reveal))))]" : "xl:border-l-0 xl:[clip-path:inset(0_calc(100%*(1-var(--reveal)))_0_0)]"
-        } [clip-path:inset(0_0_calc(100%*(1-var(--reveal)))_0)] focus-within:!opacity-100 focus-within:![clip-path:none]`}
+      <aside
+        className={`relative flex w-full max-w-[42rem] flex-col gap-2.5 border border-gray-300 bg-white/60 p-5 backdrop-blur-sm transition-[clip-path,opacity] duration-[900ms] ease-out motion-reduce:transition-none dark:border-white/10 dark:bg-white/[0.04] xl:max-w-none xl:flex-1 xl:px-7 xl:py-5 ${
+          isEven ? "xl:border-r-0" : "xl:border-l-0"
+        } ${clip} ${revealed ? "opacity-100" : "opacity-0"} focus-within:!opacity-100 focus-within:![clip-path:inset(0)]`}
       >
         <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gray-900 dark:bg-white/70" />
 
         <p className="text-xs font-medium uppercase tracking-[0.2em] text-gray-500 dark:text-white/50">
           Project {pad(index + 1)} <span className="opacity-60">/ {pad(total)}</span>
         </p>
-        <p className="leading-relaxed text-gray-700 dark:text-white/70">{summary}</p>
+        <p className="text-[0.95rem] leading-relaxed text-gray-700 dark:text-white/70">{summary}</p>
 
         <ul className="flex flex-col gap-2">
           {highlights.map((item) => (
@@ -82,12 +79,12 @@ export default function Project({ title, description, summary, highlights, tags,
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="group/link mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white outline-none transition hover:bg-gray-950 focus-visible:ring-2 focus-visible:ring-gray-400 dark:bg-white/10 dark:hover:bg-white/20"
+          className="group/link mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-gray-900 px-5 py-1.5 text-sm font-medium text-white outline-none transition hover:bg-gray-950 focus-visible:ring-2 focus-visible:ring-gray-400 dark:bg-white/10 dark:hover:bg-white/20"
         >
           {linkLabel}
           <FiArrowUpRight aria-hidden className="transition motion-safe:group-hover/link:-translate-y-0.5 motion-safe:group-hover/link:translate-x-0.5" />
         </a>
-      </motion.aside>
+      </aside>
     </div>
   );
 }
