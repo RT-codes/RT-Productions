@@ -9,6 +9,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // Dark mode leans on the darker grays, so they are neutral/warm instead of Tailwind's blue-tinted ones.
+      colors: {
+        gray: {
+          400: '#a3a3a1',
+          500: '#7d7c7a',
+          700: '#2c2b2a',
+          800: '#1b1a19',
+          900: '#0e0e0e',
+          950: '#080808',
+        },
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

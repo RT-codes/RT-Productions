@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { thinkingWords } from "@/lib/data";
@@ -8,38 +8,38 @@ import { usePrefersReducedMotion } from "@/lib/hooks";
 
 const WORDS_PER_HEADING = 2;
 const WORD_MS = 550;
-const SPINNER_FRAMES = ["·", "✢", "✣", "✶", "✻", "✽"];
-
 type SectionHeadingProps = {
   children: React.ReactNode;
+  /** Called once the heading has finished thinking and settled. */
+  onSettled?: () => void;
 };
 
 function pickWords() {
   return [...thinkingWords].sort(() => Math.random() - 0.5).slice(0, WORDS_PER_HEADING);
 }
 
-function Spinner() {
-  const [frame, setFrame] = useState(0);
-  useEffect(() => {
-    const id = setInterval(() => setFrame((f) => (f + 1) % SPINNER_FRAMES.length), 120);
-    return () => clearInterval(id);
-  }, []);
-  return <span className="inline-block w-[1.2em] text-center text-[#b5502b] dark:text-[#d97757]">{SPINNER_FRAMES[frame]}</span>;
-}
-
 // Thinks through a few words when scrolled into view, then settles into the real heading.
-export default function SectionHeading({ children }: SectionHeadingProps) {
+export default function SectionHeading({ children, onSettled }: SectionHeadingProps) {
   const reduceMotion = usePrefersReducedMotion();
   const [phase, setPhase] = useState<"idle" | "thinking" | "done">("idle");
   const [words, setWords] = useState<string[]>([]);
   const [step, setStep] = useState(0);
+  // Parents usually pass an inline callback; keep the latest one without restarting the timers.
+  const onSettledRef = useRef(onSettled);
+  useEffect(() => {
+    onSettledRef.current = onSettled;
+  });
 
   const { ref } = useInView({
     threshold: 0.8,
     triggerOnce: true,
     onChange: (inView) => {
       if (!inView) return;
-      if (reduceMotion) return setPhase("done");
+      if (reduceMotion) {
+        setPhase("done");
+        onSettledRef.current?.();
+        return;
+      }
       setWords(pickWords());
       setStep(0);
       setPhase("thinking");
@@ -48,7 +48,11 @@ export default function SectionHeading({ children }: SectionHeadingProps) {
 
   useEffect(() => {
     if (phase !== "thinking") return;
-    const id = setTimeout(() => (step + 1 < words.length ? setStep(step + 1) : setPhase("done")), WORD_MS);
+    const id = setTimeout(() => {
+      if (step + 1 < words.length) return setStep(step + 1);
+      setPhase("done");
+      onSettledRef.current?.();
+    }, WORD_MS);
     return () => clearTimeout(id);
   }, [phase, step, words.length]);
 
@@ -62,8 +66,7 @@ export default function SectionHeading({ children }: SectionHeadingProps) {
       <AnimatePresence mode="wait">
         {phase === "thinking" && !reduceMotion && (
           <motion.span key={words[step]} aria-hidden className="absolute inset-0 flex items-center justify-center gap-1 whitespace-nowrap" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }}>
-            <Spinner />
-            <span className="thinking-shimmer">{words[step]}…</span>
+            <span className="thinking-shimmer text-lg font-normal normal-case tracking-wide">{words[step]}…</span>
           </motion.span>
         )}
       </AnimatePresence>

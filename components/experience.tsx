@@ -40,9 +40,9 @@ export default function Experience() {
               icon={item.icon}
               iconStyle={{
                 visibility: "visible",
-                backgroundColor: isDark ? "#374151" : "white",
+                backgroundColor: isDark ? "#2c2b2a" : "white",
                 color: isDark ? "#f9fafb" : undefined,
-                boxShadow: isDark ? "0 0 0 4px #111827, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)" : undefined,
+                boxShadow: isDark ? "0 0 0 4px #0e0e0e, inset 0 2px 0 rgba(0, 0, 0, 0.08), 0 3px 0 4px rgba(0, 0, 0, 0.05)" : undefined,
                 fontSize: "1.2rem",
               }}
             >

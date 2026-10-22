@@ -20,14 +20,14 @@ export default function Intro() {
     <section ref={ref} className="mb-18 w-full max-w-[56rem] scroll-mt-[100rem] px-4 sm:mb-0" id="home">
       <motion.div className="relative sm:pl-20" initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, bounce: 0.25 }}>
         <div className="relative z-10 mx-auto -mb-16 h-40 w-40 sm:absolute sm:left-0 sm:top-14 sm:mx-0 sm:mb-0 sm:h-48 sm:w-48">
-          <div aria-hidden className="absolute -inset-2 rounded-full bg-gradient-to-br from-[#fbe2e3] via-[#dbd7fb] to-[#946263] opacity-70 blur-md dark:from-[#946263] dark:via-[#676394] dark:to-[#dbd7fb]" />
+          <div aria-hidden className="absolute -inset-2 rounded-full bg-gradient-to-br from-[#fbe2e3] via-[#dbd7fb] to-[#f0b9a0] opacity-70 blur-md dark:from-[#d97757] dark:via-[#7a3d14] dark:to-[#22a5b8]" />
           <Image src={avatar} alt="Rowan portrait" width={384} height={384} quality={95} priority className="relative h-full w-full rounded-full border-[0.4rem] border-white object-cover shadow-2xl dark:border-gray-700" />
           <motion.span className="absolute bottom-1 right-1 flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl shadow-lg dark:bg-gray-700" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 125, delay: 0.5 }}>
             👋
           </motion.span>
         </div>
 
-        <Panel className="overflow-hidden">
+        <Panel className="overflow-hidden rounded-[2rem]">
           <div className="px-6 pb-8 pt-20 text-center sm:py-12 sm:pl-32 sm:pr-10 sm:text-left">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-black/10 bg-black/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-gray-600 dark:border-white/10 dark:bg-white/[0.06] dark:text-white/80">
               <span aria-hidden className="h-2 w-2 rounded-full bg-emerald-500" />
