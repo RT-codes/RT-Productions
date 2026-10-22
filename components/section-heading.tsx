@@ -7,7 +7,7 @@ import { thinkingWords } from "@/lib/data";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 
 const WORDS_PER_HEADING = 2;
-const WORD_MS = 550;
+const WORD_MS = 1000;
 const REVEAL_MS = 600;
 type SectionHeadingProps = {
   children: React.ReactNode;
