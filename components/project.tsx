@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, type MotionStyle } from "framer-motion";
 import { FiArrowUpRight, FiCheck } from "react-icons/fi";
 import { projectsData } from "@/lib/data";
 import { usePrefersReducedMotion } from "@/lib/hooks";
@@ -12,30 +12,25 @@ type ProjectProps = (typeof projectsData)[number] & { index: number; total: numb
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Project({ title, description, summary, highlights, tags, imageUrl, url, linkLabel, index, total }: ProjectProps) {
-  const cardRef = useRef<HTMLAnchorElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const reduceMotion = usePrefersReducedMotion();
 
-  // Even rows put the card on the right and slide the panel in from the left (and vice versa).
+  // Even rows put the card on the right and the panel on the left (and vice versa).
   const isEven = index % 2 === 1;
-  const slide = reduceMotion ? 0 : isEven ? -64 : 64;
 
-  // Each element is tracked on its own, so a stacked panel animates when it is actually on screen.
-  const { scrollYProgress: cardProgress } = useScroll({ target: cardRef, offset: ["start 100%", "start 60%"] });
-  const { scrollYProgress: panelProgress } = useScroll({ target: panelRef, offset: ["start 100%", "start 60%"] });
-  const cardScale = useTransform(cardProgress, [0, 1], [reduceMotion ? 1 : 0.94, 1]);
-  const panelX = useTransform(panelProgress, [0, 1], [slide, 0]);
-  const panelOpacity = useTransform(panelProgress, [0, 0.7], [reduceMotion ? 1 : 0, 1]);
+  // The panel is uncovered from the card's edge as it scrolls into view: nothing moves, so it never bumps into the card.
+  const { scrollYProgress } = useScroll({ target: panelRef, offset: ["start 95%", "start 50%"] });
+  const reveal = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 1 : 0, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [reduceMotion ? 1 : 0, 1]);
+  const panelStyle = { "--reveal": reveal, opacity } as MotionStyle;
 
   return (
     <div className={`flex flex-col items-center gap-4 xl:flex-row xl:gap-0 ${isEven ? "xl:flex-row-reverse" : ""}`}>
       <motion.a
-        ref={cardRef}
         href={url}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${title} (opens in a new tab)`}
-        style={{ scale: cardScale }}
         className={`group/card relative block w-full sm:h-[20rem] max-w-[42rem] shrink-0 overflow-hidden border border-gray-300 bg-gray-200 outline-none transition hover:bg-gray-300 focus-visible:ring-2 focus-visible:ring-gray-400 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/20 sm:pr-8 ${isEven ? "sm:pl-8" : ""}`}
       >
         <div className={`flex flex-col px-5 pt-5 sm:h-full sm:max-w-[50%] sm:pb-7 sm:pr-2 sm:pt-10 ${isEven ? "sm:ml-[18rem]" : ""}`}>
@@ -62,10 +57,10 @@ export default function Project({ title, description, summary, highlights, tags,
 
       <motion.aside
         ref={panelRef}
-        style={{ x: panelX, opacity: panelOpacity }}
+        style={panelStyle}
         className={`relative flex w-full max-w-[42rem] flex-col gap-4 border border-gray-300 bg-white/60 p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] xl:max-w-none xl:flex-1 xl:self-stretch xl:justify-center xl:p-8 ${
-          isEven ? "xl:border-r-0" : "xl:border-l-0"
-        }`}
+          isEven ? "xl:border-r-0 xl:[clip-path:inset(0_0_0_calc(100%*(1-var(--reveal))))]" : "xl:border-l-0 xl:[clip-path:inset(0_calc(100%*(1-var(--reveal)))_0_0)]"
+        } [clip-path:inset(0_0_calc(100%*(1-var(--reveal)))_0)] focus-within:!opacity-100 focus-within:![clip-path:none]`}
       >
         <span aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gray-900 dark:bg-white/70" />
 
