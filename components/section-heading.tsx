@@ -8,7 +8,7 @@ import { usePrefersReducedMotion } from "@/lib/hooks";
 
 const WORDS_PER_HEADING = 2;
 const WORD_MS = 550;
-const SPINNER_FRAMES = ["·", "✢", "✳", "✶", "✻", "✽"].map((glyph) => `${glyph}\uFE0E`);
+const SPINNER_FRAMES = ["·", "✢", "✣", "✶", "✻", "✽"];
 
 type SectionHeadingProps = {
   children: React.ReactNode;
@@ -38,7 +38,8 @@ export default function SectionHeading({ children }: SectionHeadingProps) {
     threshold: 0.8,
     triggerOnce: true,
     onChange: (inView) => {
-      if (!inView || reduceMotion) return;
+      if (!inView) return;
+      if (reduceMotion) return setPhase("done");
       setWords(pickWords());
       setStep(0);
       setPhase("thinking");
