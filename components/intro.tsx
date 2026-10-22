@@ -37,7 +37,7 @@ export default function Intro() {
               Hi, I&apos;m Rowan, a <span className="italic">creative product builder</span>
             </h1>
             <p className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-white/85">
-              With <span className="font-semibold text-gray-950 dark:text-white">5+ years</span> of experience in building modern web applications and internal tools. I enjoy using modern developer tools, software, and <span className="italic">AI-driven solutions</span> that push the boundaries of what&apos;s possible.
+              <span className="font-semibold text-gray-950 dark:text-white">5+ years</span> of building web apps, internal tools and data pipelines. I started in game design, so I care how things feel to use, and I like working <span className="italic">on the frontier of what&apos;s possible</span>, building with AI agents every day.
             </p>
           </div>
 
