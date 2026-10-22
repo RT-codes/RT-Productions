@@ -2,35 +2,41 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowUpRight, FiCheck } from "react-icons/fi";
 import { projectsData } from "@/lib/data";
+import { usePrefersReducedMotion } from "@/lib/hooks";
 
 type ProjectProps = (typeof projectsData)[number] & { index: number; total: number };
 
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function Project({ title, description, summary, highlights, tags, imageUrl, url, linkLabel, index, total }: ProjectProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduceMotion = useReducedMotion();
+  const cardRef = useRef<HTMLAnchorElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
+  const reduceMotion = usePrefersReducedMotion();
+
   // Even rows put the card on the right and slide the panel in from the left (and vice versa).
   const isEven = index % 2 === 1;
-  const slide = isEven ? -64 : 64;
+  const slide = reduceMotion ? 0 : isEven ? -64 : 64;
 
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start 95%", "start 40%"] });
-  const panelX = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : slide, 0]);
-  const panelOpacity = useTransform(scrollYProgress, [0, 0.7], [reduceMotion ? 1 : 0, 1]);
-  const cardScale = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 1 : 0.94, 1]);
+  // Each element is tracked on its own, so a stacked panel animates when it is actually on screen.
+  const { scrollYProgress: cardProgress } = useScroll({ target: cardRef, offset: ["start 100%", "start 60%"] });
+  const { scrollYProgress: panelProgress } = useScroll({ target: panelRef, offset: ["start 100%", "start 60%"] });
+  const cardScale = useTransform(cardProgress, [0, 1], [reduceMotion ? 1 : 0.94, 1]);
+  const panelX = useTransform(panelProgress, [0, 1], [slide, 0]);
+  const panelOpacity = useTransform(panelProgress, [0, 0.7], [reduceMotion ? 1 : 0, 1]);
 
   return (
-    <div ref={ref} className={`flex flex-col items-center gap-4 xl:flex-row xl:gap-0 ${isEven ? "xl:flex-row-reverse" : ""}`}>
+    <div className={`flex flex-col items-center gap-4 xl:flex-row xl:gap-0 ${isEven ? "xl:flex-row-reverse" : ""}`}>
       <motion.a
+        ref={cardRef}
         href={url}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`${title} (opens in a new tab)`}
         style={{ scale: cardScale }}
-        className="group/card relative block w-full sm:h-[20rem] max-w-[42rem] shrink-0 overflow-hidden border border-gray-300 bg-gray-200 outline-none transition hover:bg-gray-300 focus-visible:ring-2 focus-visible:ring-gray-400 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/20 sm:pr-8"
+        className={`group/card relative block w-full sm:h-[20rem] max-w-[42rem] shrink-0 overflow-hidden border border-gray-300 bg-gray-200 outline-none transition hover:bg-gray-300 focus-visible:ring-2 focus-visible:ring-gray-400 dark:border-white/10 dark:bg-white/10 dark:hover:bg-white/20 sm:pr-8 ${isEven ? "sm:pl-8" : ""}`}
       >
         <div className={`flex flex-col px-5 pt-5 sm:h-full sm:max-w-[50%] sm:pb-7 sm:pr-2 sm:pt-10 ${isEven ? "sm:ml-[18rem]" : ""}`}>
           <h3 className="text-2xl font-semibold">{title}</h3>
@@ -48,13 +54,14 @@ export default function Project({ title, description, summary, highlights, tags,
           src={imageUrl}
           alt={`Screenshot of ${title}`}
           quality={95}
-          className={`mx-auto mt-6 h-auto w-[calc(100%-2.5rem)] rounded-t-lg shadow-xl shadow-slate-600 transition group-hover/card:translate-y-2 group-hover/card:scale-[1.03] sm:absolute sm:top-8 sm:m-0 sm:w-[28.25rem] sm:group-hover/card:translate-y-3 sm:group-hover/card:scale-[1.04] ${
-            isEven ? "sm:-left-40 sm:group-hover/card:translate-x-3 sm:group-hover/card:rotate-2" : "sm:-right-40 sm:group-hover/card:-translate-x-3 sm:group-hover/card:-rotate-2"
+          className={`mx-auto mt-6 h-auto w-[calc(100%-2.5rem)] rounded-t-lg shadow-xl shadow-slate-600 transition motion-safe:group-hover/card:translate-y-2 motion-safe:group-hover/card:scale-[1.03] sm:absolute sm:top-8 sm:m-0 sm:w-[28.25rem] motion-safe:sm:group-hover/card:translate-y-3 motion-safe:sm:group-hover/card:scale-[1.04] ${
+            isEven ? "sm:-left-40 motion-safe:sm:group-hover/card:translate-x-3 motion-safe:sm:group-hover/card:rotate-2" : "sm:-right-40 motion-safe:sm:group-hover/card:-translate-x-3 motion-safe:sm:group-hover/card:-rotate-2"
           }`}
         />
       </motion.a>
 
       <motion.aside
+        ref={panelRef}
         style={{ x: panelX, opacity: panelOpacity }}
         className={`relative flex w-full max-w-[42rem] flex-col gap-4 border border-gray-300 bg-white/60 p-6 backdrop-blur-sm dark:border-white/10 dark:bg-white/[0.04] xl:max-w-none xl:flex-1 xl:self-stretch xl:justify-center xl:p-8 ${
           isEven ? "xl:border-r-0" : "xl:border-l-0"
@@ -83,7 +90,7 @@ export default function Project({ title, description, summary, highlights, tags,
           className="group/link mt-1 inline-flex w-fit items-center gap-2 rounded-full bg-gray-900 px-5 py-2 text-sm font-medium text-white outline-none transition hover:bg-gray-950 focus-visible:ring-2 focus-visible:ring-gray-400 dark:bg-white/10 dark:hover:bg-white/20"
         >
           {linkLabel}
-          <FiArrowUpRight aria-hidden className="transition group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
+          <FiArrowUpRight aria-hidden className="transition motion-safe:group-hover/link:-translate-y-0.5 motion-safe:group-hover/link:translate-x-0.5" />
         </a>
       </motion.aside>
     </div>

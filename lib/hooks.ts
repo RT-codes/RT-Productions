@@ -43,3 +43,20 @@ export function useTheme() {
 
   return { theme, setTheme, toggleTheme: () => setTheme(theme === "dark" ? "light" : "dark") };
 }
+
+const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
+
+function subscribeToReducedMotion(onChange: () => void) {
+  const query = window.matchMedia(REDUCED_MOTION_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+// The server snapshot is always `false`, so hydration matches and the real preference applies right after.
+export function usePrefersReducedMotion() {
+  return useSyncExternalStore(
+    subscribeToReducedMotion,
+    () => window.matchMedia(REDUCED_MOTION_QUERY).matches,
+    () => false,
+  );
+}
