@@ -22,3 +22,26 @@ main {
     padding-left: 0rem !important;
     padding-right: 0rem !important;
 }
+/* Text shimmer used while a section heading is "thinking". */
+@keyframes thinking-shimmer {
+    from { background-position: 150% 0; }
+    to { background-position: -50% 0; }
+}
+
+.thinking-shimmer {
+    --shimmer-base: #6b7280;
+    background-image: linear-gradient(100deg, var(--shimmer-base) 35%, #d97757 50%, var(--shimmer-base) 65%);
+    background-size: 250% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: thinking-shimmer 1.6s linear infinite;
+}
+
+html.dark .thinking-shimmer {
+    --shimmer-base: #9ca3af;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .thinking-shimmer { animation: none; }
+}

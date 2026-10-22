@@ -133,3 +133,18 @@ export const contactData = [
 ];
 
 export const skillsData = ["HTML", "CSS", "JavaScript", "Python", "React", "Svelte", "Next.js", "Payload", "Node.js", "TypeScript", "Git", "Tailwind", "MongoDB", "C#", "Photoshop", "Illustrator", "Figma", "Flutter", "PostgreSQL", "Python", "Django", "Vim / Neovim", "Unity", "Blender", "ZBrush", "Cinema 4D", "Maya", "3DS Max", "Unreal Engine", "Debian"] as const;
+
+// Shown one after another while a section heading "thinks" before it settles. Add, remove or rewrite these as you like.
+export const thinkingWords = [
+  "Accomplishing", "Actioning", "Actualizing", "Baking", "Booping", "Brewing", "Calculating", "Cerebrating",
+  "Channelling", "Churning", "Clauding", "Coalescing", "Cogitating", "Computing", "Conjuring", "Considering",
+  "Cooking", "Crafting", "Creating", "Crunching", "Deliberating", "Determining", "Discombobulating", "Doing",
+  "Effecting", "Elucidating", "Enchanting", "Envisioning", "Finagling", "Flibbertigibbeting", "Forging",
+  "Forming", "Frolicking", "Generating", "Germinating", "Hatching", "Herding", "Honking", "Hustling", "Ideating",
+  "Imagining", "Incubating", "Inferring", "Manifesting", "Marinating", "Meandering", "Moseying", "Mulling",
+  "Mustering", "Musing", "Noodling", "Percolating", "Perusing", "Philosophising", "Pondering", "Pontificating",
+  "Processing", "Puttering", "Puzzling", "Reticulating", "Ruminating", "Scheming", "Schlepping", "Shimmying",
+  "Shucking", "Simmering", "Smooshing", "Spelunking", "Spinning", "Stewing", "Sussing", "Synthesizing", "Thinking",
+  "Tinkering", "Transmuting", "Unfurling", "Unravelling", "Vibing", "Wandering", "Whirring", "Wibbling", "Wizarding",
+  "Working", "Wrangling",
+] as const;
