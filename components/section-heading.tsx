@@ -6,8 +6,8 @@ import { useInView } from "react-intersection-observer";
 import { thinkingWords } from "@/lib/data";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 
-const WORDS_PER_HEADING = 2;
-const WORD_MS = 1000;
+const WORDS_PER_HEADING = 3;
+const WORD_MS = 1300;
 const REVEAL_MS = 600;
 type SectionHeadingProps = {
   children: React.ReactNode;
