@@ -40,6 +40,7 @@ export default function SectionHeading({ children, onSettled }: SectionHeadingPr
         if (entry.boundingClientRect.bottom < 0) setPhase((current) => (current === "idle" ? "done" : current));
         return;
       }
+      if (phase !== "idle") return; // already skipped or running
       if (reduceMotion) return setPhase("done");
       setWords(pickWords());
       setStep(0);
@@ -56,18 +57,11 @@ export default function SectionHeading({ children, onSettled }: SectionHeadingPr
     return () => clearTimeout(id);
   }, [phase, step, words.length]);
 
-  // Tell the parent once the real heading has finished fading in.
-  useEffect(() => {
-    if (phase !== "done") return;
-    const id = setTimeout(() => onSettledRef.current?.(), reduceMotion ? 0 : REVEAL_MS);
-    return () => clearTimeout(id);
-  }, [phase, reduceMotion]);
-
   const settled = phase === "done" || reduceMotion;
 
   return (
     <h2 ref={ref} className="relative mb-8 text-center text-3xl font-medium capitalize">
-      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: reduceMotion ? 0 : REVEAL_MS / 1000, ease: "easeOut" }}>
+      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: reduceMotion ? 0 : REVEAL_MS / 1000, ease: "easeOut" }} onAnimationComplete={() => settled && onSettledRef.current?.()}>
         {children}
       </motion.span>
       <AnimatePresence mode="wait">
