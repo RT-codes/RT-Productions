@@ -6,9 +6,9 @@ import { useInView } from "react-intersection-observer";
 import { thinkingWords } from "@/lib/data";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 
-const WORDS_PER_HEADING = 3;
-const WORD_MS = 700;
-const SPINNER_FRAMES = ["·", "✢", "✳", "✶", "✻", "✽"];
+const WORDS_PER_HEADING = 2;
+const WORD_MS = 550;
+const SPINNER_FRAMES = ["·", "✢", "✳", "✶", "✻", "✽"].map((glyph) => `${glyph}\uFE0E`);
 
 type SectionHeadingProps = {
   children: React.ReactNode;
@@ -24,7 +24,7 @@ function Spinner() {
     const id = setInterval(() => setFrame((f) => (f + 1) % SPINNER_FRAMES.length), 120);
     return () => clearInterval(id);
   }, []);
-  return <span className="inline-block w-[1.2em] text-center text-[#d97757]">{SPINNER_FRAMES[frame]}</span>;
+  return <span className="inline-block w-[1.2em] text-center text-[#b5502b] dark:text-[#d97757]">{SPINNER_FRAMES[frame]}</span>;
 }
 
 // Thinks through a few words when scrolled into view, then settles into the real heading.
@@ -55,11 +55,11 @@ export default function SectionHeading({ children }: SectionHeadingProps) {
 
   return (
     <h2 ref={ref} className="relative mb-8 text-center text-3xl font-medium capitalize">
-      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: 0.6, ease: "easeOut" }}>
+      <motion.span className="inline-block" initial={false} animate={{ opacity: settled ? 1 : 0, filter: settled ? "blur(0px)" : "blur(8px)", y: settled ? 0 : 6 }} transition={{ duration: reduceMotion ? 0 : 0.6, ease: "easeOut" }}>
         {children}
       </motion.span>
       <AnimatePresence mode="wait">
-        {phase === "thinking" && (
+        {phase === "thinking" && !reduceMotion && (
           <motion.span key={words[step]} aria-hidden className="absolute inset-0 flex items-center justify-center gap-1 whitespace-nowrap" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.15 }}>
             <Spinner />
             <span className="thinking-shimmer">{words[step]}…</span>
