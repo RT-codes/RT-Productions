@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { projectsData } from "@/lib/data";
 import Image from "next/image";
 import { motion, useAnimation, useScroll } from "framer-motion";
@@ -13,12 +13,7 @@ export default function Project({ title, description, tags, imageUrl, childCount
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const controls = useAnimation();
-  const [offset, setOffset] = useState(0);
-
-  useEffect(() => {
-    // console.log(childCount);
-    setOffset((childCount*childCount) / 20);
-  }, [childCount]);
+  const offset = (childCount * childCount) / 20;
 
   //   useScroll({
   //     target: ref,
