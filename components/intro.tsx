@@ -19,7 +19,7 @@ export default function Intro() {
   return (
     <section ref={ref} className="mb-18 w-full max-w-[56rem] scroll-mt-[100rem] px-4 sm:mb-0" id="home">
       <motion.div className="relative sm:pl-20" initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 100, bounce: 0.25 }}>
-        <div className="relative z-10 mx-auto -mb-16 h-40 w-40 sm:absolute sm:left-0 sm:top-14 sm:mx-0 sm:mb-0 sm:h-48 sm:w-48">
+        <div className="relative z-10 mx-auto -mb-16 h-[8.5rem] w-[8.5rem] sm:absolute sm:left-0 sm:top-14 sm:mx-0 sm:mb-0 sm:h-[10.2rem] sm:w-[10.2rem]">
           <div aria-hidden className="absolute -inset-2 rounded-full bg-gradient-to-br from-[#fbe2e3] via-[#dbd7fb] to-[#f0b9a0] opacity-70 blur-md dark:from-[#d97757] dark:via-[#7a3d14] dark:to-[#22a5b8]" />
           <Image src={avatar} alt="Rowan portrait" width={384} height={384} quality={95} priority className="relative h-full w-full rounded-full border-[0.4rem] border-white object-cover shadow-2xl dark:border-gray-700" />
           <motion.span className="absolute bottom-1 right-1 flex h-11 w-11 items-center justify-center rounded-full bg-white text-2xl shadow-lg dark:bg-gray-700" initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ type: "spring", stiffness: 125, delay: 0.5 }}>
@@ -36,7 +36,7 @@ export default function Intro() {
             <h1 className="text-balance text-3xl font-bold !leading-tight sm:text-4xl">
               Hi, I&apos;m Rowan, a <span className="italic">creative product builder</span>
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-white/85">
+            <p className="mt-4 text-lg leading-relaxed text-gray-700 dark:text-white/50">
               <span className="font-semibold text-gray-950 dark:text-white">5+ years</span> of building web apps, internal tools and data pipelines. I started in game design, so I care how things feel to use, and I like working <span className="italic">on the frontier of what&apos;s possible</span>, building with AI agents every day.
             </p>
           </div>
